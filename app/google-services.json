@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "451343811154",
+    "firebase_url": "https://teachercalls-default-rtdb.firebaseio.com",
+    "project_id": "teachercalls",
+    "storage_bucket": "teachercalls.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451343811154:android:03cd7843b5f7af46af158b",
+        "android_client_info": {
+          "package_name": "com.example.teachercalls"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451343811154-rp85s98od4fpbg3h63ncgfd0up66l3hd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANU_ZWjv41AzgKx0eBQBwcGw7JqYAVjEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451343811154-rp85s98od4fpbg3h63ncgfd0up66l3hd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
