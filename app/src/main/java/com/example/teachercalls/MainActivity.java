@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -48,10 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.TextView);
 
+        NumberPicker npker = findViewById(R.id.Classpick);
+
+        npker.setOnLongPressUpdateInterval(100);
+        npker.setWrapSelectorWheel(true);
+        npker.setMaxValue(11); //최대값
+        npker.setMinValue(1); //최소값
         // Firebase Realtime Database 데이터 읽기
         String databaseUrl = "https://teachercalls-default-rtdb.firebaseio.com/";
-        String dataPath = "4";
-        String apiUrl = databaseUrl + dataPath;
+        int Class=npker.getValue();
+        String apiUrl = databaseUrl + Class;
+
 
         // Firebase Realtime Database 데이터 요청
         // 백그라운드 스레드에서 네트워크 요청을 수행해야 합니다.
