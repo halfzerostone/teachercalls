@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // Firebase Realtime Database 데이터 읽기
         String databaseUrl = "https://teachercalls-default-rtdb.firebaseio.com/";
         int Class=npker.getValue();
-        String apiUrl = databaseUrl + npker.getValue();
+        String apiUrl = databaseUrl + "4";
 
 
         // Firebase Realtime Database 데이터 요청
