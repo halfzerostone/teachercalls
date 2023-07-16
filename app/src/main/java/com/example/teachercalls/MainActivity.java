@@ -58,12 +58,13 @@ public class MainActivity extends AppCompatActivity {
         // Firebase Realtime Database 데이터 읽기
         String databaseUrl = "https://teachercalls-default-rtdb.firebaseio.com/";
         int Class=npker.getValue();
-        String apiUrl = databaseUrl + Class;
+        String apiUrl = databaseUrl + npker.getValue();
 
 
         // Firebase Realtime Database 데이터 요청
         // 백그라운드 스레드에서 네트워크 요청을 수행해야 합니다.
         dataRef = FirebaseDatabase.getInstance().getReferenceFromUrl(apiUrl);
+
 
         // ValueEventListener 등록
         valueEventListener = new ValueEventListener() {

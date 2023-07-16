@@ -1,5 +1,6 @@
 package com.example.teachercalls;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,6 +13,7 @@ public class NotificationHelper {
     private static final String CHANNEL_ID = "my_channel_id";
     private static final int NOTIFICATION_ID = 1;
 
+    @SuppressLint("MissingPermission")
     public static void showNotification(Context context, String title, String message) {
         createNotificationChannel(context);
 
