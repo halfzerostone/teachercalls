@@ -1,6 +1,7 @@
 package com.example.teachercalls;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.PackageManager;
@@ -17,8 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Firebase Realtime Database 데이터 읽기
         String databaseUrl = "https://teachercalls-default-rtdb.firebaseio.com/";
         int Class=npker.getValue();
-        String apiUrl = databaseUrl + "9";
+        String apiUrl = databaseUrl + "4";
 
 
         // Firebase Realtime Database 데이터 요청
@@ -85,7 +89,13 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Firebase 데이터 읽기 에러: " + databaseError.getMessage());
             }
         };
-
+        npker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+                    public void onValueChange(NumberPicker picker,int oldVal,int newVal){
+                    String NapiUrl=databaseUrl+String.valueOf(newVal);
+                    dataRef=FirebaseDatabase.getInstance().getReferenceFromUrl(NapiUrl);
+            }
+        });
         // ValueEventListener를 Firebase Realtime Database 참조에 연결
         dataRef.addValueEventListener(valueEventListener);
     }
@@ -98,5 +108,35 @@ public class MainActivity extends AppCompatActivity {
         if (dataRef != null && valueEventListener != null) {
             dataRef.removeEventListener(valueEventListener);
         }
+        Timer timer = new Timer();
+    timer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+            valueEventListener = new ValueEventListener() {
+
+
+
+                @Override
+                public void onDataChange( DataSnapshot dataSnapshot) {
+                    // 데이터 변경 이벤트 발생 시 호출됨
+                    String data = dataSnapshot.getValue(String.class);
+                    if (data != null) {
+                        // 데이터를 TextView에 설정
+                        textView.setText(data);
+                        NotificationHelper.showNotification(MainActivity.this,"선생님이 부르신다",data);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // 에러 처리
+                    System.out.println("Firebase 데이터 읽기 에러: " + databaseError.getMessage());
+                }
+            };
+            }
+
+    },0,5);
     }
+
+
 }
